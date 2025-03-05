@@ -61,7 +61,7 @@ git pull origin main
 ### Work on a separate branch:
 git checkout -b feature-branch-name
 ### After changes, commit and push your branch:
-git add .
-git commit -m "Short description of changes"
-git push origin feature-branch-name
+git add .  
+git commit -m "Short description of changes"  
+git push origin feature-branch-name  
 ### Create a Pull Request (PR) on GitHub and request a review before merging to main.
