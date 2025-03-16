@@ -33,6 +33,7 @@ git clone https://github.com/Yazeenn/weather-app.git
 cd weather-app
 ### Install dependencies:
 npm install
+
 npm install react-router-dom
 ### Start the app:
 npm start
