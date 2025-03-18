@@ -15,7 +15,7 @@ const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState([]);
 
-  const API_KEY = "b29c6dcf39f9032ef46114505c791779";
+  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
   const fetchWeather = async () => {
     if (!city) return;
