@@ -10,10 +10,7 @@ import Snow from "./weather-icons/snow.png";
 import ClearNight from "./weather-icons/clear-night.png";
 import CloudyNight from "./weather-icons/cloudy-night.png";
 
-const Weather = () => {
-  const [city, setCity] = useState("");
-  const [weatherData, setWeatherData] = useState(null);
-  const [forecastData, setForecastData] = useState([]);
+const Weather = ({city, setCity, weatherData, setWeatherData, forecastData, setForecastData}) => {
 
   const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
