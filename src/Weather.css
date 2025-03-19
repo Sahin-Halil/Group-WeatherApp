@@ -1,0 +1,126 @@
+.weather-container {
+  position: relative;
+  width: 393px;
+  height: 750px;
+  margin: auto;
+  padding: 20px;
+  background: #64cdfa;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  font-family: "Arial", sans-serif;
+} 
+  
+.search-bar-container {
+  display: flex;
+  align-items: center;   
+  justify-content: center;
+  background: white;    
+  border-radius: 30px;
+  padding: 8px 15px;
+  width: 90%;
+  margin: 10px auto;
+  height: 40px;
+}
+  
+.input-city-name {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+  
+.get-weather-button {
+  background: transparent;
+  margin-top: 3px;
+  border: none;
+  cursor: pointer;
+}
+  
+.weather-data h2 {
+  font-size: 50px;
+  margin: 0;
+}
+
+.weather-icon img{
+  width: 150px;
+  margin: 20px;
+}
+
+.temperature {
+  font-size: 70px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.weather-details {
+  display: flex;
+  justify-content: space-around;
+  font-size: 14px;
+  background: #4898E3;
+  border-radius: 15px;
+  margin: 10px 0;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.forecast-container {
+  display: flex;
+  justify-content: space-around;
+  background: #4898E3;
+  padding: 10px;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+.forecast-container img {
+  width: 40px;
+}
+
+.forecast-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.bottom-nav {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: white;
+  border-radius: 30px;
+  padding: 8px 15px;
+  width: 85%;
+  margin: 10px auto;
+  height: 50px;
+}
+
+.nav-button {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 5px 10px;
+  color: #808080;
+}
+
+.nav-button img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+}
+
+.nav-button.active {
+  background: #f0f0f0;
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: black;
+  font-weight: bold;
+}
