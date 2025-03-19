@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Weather.css";
+import Navbar from "./Navbar";
 
 import ClearDay from "./weather-icons/sun.png";
 import CloudyDay from "./weather-icons/cloudy-day.png";
@@ -16,7 +17,7 @@ const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState([]);
 
-  const API_KEY = "b29c6dcf39f9032ef46114505c791779";
+  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
   const fetchWeather = async () => {
     if (!city){ 
@@ -118,23 +119,8 @@ const Weather = () => {
         )}
         </div>
       )}
-
-    <div className="bottom-nav">
-      <Link to="/Activities" className="nav-button">
-        <img src="/activities-icon.png"/>
-        Activities
-      </Link>
-      <Link to="/Weather" className="nav-button">
-        <img src="/weather-icon.png"/>
-        Weather
-      </Link>
-      <Link to="/Settings" className="nav-button">
-        <img src="/settings-icon.png"/>
-        Settings
-      </Link>
+    <Navbar />
     </div>
-    </div>
-    );
+   );
   };
 
-export default Weather;
