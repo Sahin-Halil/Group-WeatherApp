@@ -2,6 +2,16 @@
 A simple weather forecast app built with **React** and **OpenWeather API**.  
 
 ---
+## heads up
+the .env file is ignored in Git, so everyone needs to create their own local .env file to make the weather API work.
+
+📌 Steps to set up the API key locally:  
+1️⃣ Create a new .env file inside the weather-app project folder.  
+2️⃣ Add this inside it:  
+  REACT_APP_WEATHER_API_KEY = b29c6dcf39f9032ef46114505c791779  
+
+---
+
 
 ## 📁 Project Structure (src Files)  
 
