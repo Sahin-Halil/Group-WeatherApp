@@ -13,7 +13,6 @@ import CloudyNight from "./weather-icons/cloudy-night.png";
 
 const Weather = () => {
   const [city, setCity] = useState("");
-  const[placeholder, setPlaceholder] = useState("Enter City Name")
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState([]);
 
@@ -24,32 +23,32 @@ const Weather = () => {
   }, []);
 
   const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
-  console.log('API key', API_KEY);
 
   const fetchWeather = async (location, lat = null, lon = null) => {
     try {
-      let url;
+      let weatherUrl;
+      let forecastUrl;
       
       if (lat && lon) {
-        // Fetch weather using GPS coordinates
-        url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+        weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+        forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
       } else {
-        // Fetch weather using city name
-        url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${API_KEY}`;
+        weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${API_KEY}`;
+        forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${API_KEY}`;
       }
   
-      console.log("Fetching weather from:", url); // Debugging log
-      const response = await axios.get(url);
+      const response = await axios.get(weatherUrl);
       setWeatherData(response.data);
-      setPlaceholder("Enter city name");
+
+      const forecastResponse = await axios.get(forecastUrl);
+      setForecastData(forecastResponse.data.list.slice(0, 5));
   
     } catch (error) {
-      console.error("Error fetching weather data:", error);
   
-      if (error.response && error.response.status === 404) {
-        setPlaceholder("City not found. Please enter a valid city.");
+      if (error.response) {
+        alert("City not found. Please enter a valid city.");
       } else {
-        setPlaceholder("An error occurred while fetching weather data. Please try again later.");
+        alert("An error occurred while fetching weather data. Please try again later.");
       }
     }
   };
@@ -59,23 +58,19 @@ const Weather = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          console.log("User location:", latitude, longitude);
-          fetchWeather(null, latitude, longitude); // Fetch weather using GPS
+          fetchWeather(null, latitude, longitude); 
         },
-        (error) => {
-          console.error("Error getting location:", error);
+        () => {
           alert("Location access denied. Please enable location services.");
-          fetchWeather("London"); // Defaults to London if GPS fails
+          fetchWeather("London"); 
         }
       );
     } else {
       alert("Geolocation is not supported by your browser.");
-      fetchWeather("London"); // Defaults to London if not supported
+      fetchWeather("London"); 
     }
   };
   
-
-
   const fetchWeatherIcon = (iconCode) => {
     const icons = {
       "01d": ClearDay,
@@ -99,7 +94,7 @@ const Weather = () => {
       <div className="search-bar-container">
         <input
           type="text"
-          placeholder={placeholder}
+          placeholder={"Enter city name"}
           value={city}
           onChange={(e) => setCity(e.target.value)}
           className="input-city-name"
