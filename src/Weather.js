@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Weather.css";
 import Navbar from "./Navbar";
@@ -12,18 +13,23 @@ import CloudyNight from "./weather-icons/cloudy-night.png";
 
 const Weather = () => {
   const [city, setCity] = useState("");
+  const[placeholder, setPlaceholder] = useState("Enter City Name")
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState([]);
 
   const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
   const fetchWeather = async () => {
-    if (!city) return;
+    if (!city){ 
+      setPlaceholder("Please enter a city name.");
+      return;
+    }
     try {
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
       );
       setWeatherData(response.data);
+      setPlaceholder("Enter city name");
 
       const forecastResponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`
@@ -31,6 +37,17 @@ const Weather = () => {
       setForecastData(forecastResponse.data.list.slice(0, 5));
     } catch (error) {
       console.error("Error fetching weather data:", error);
+
+      // Handle 404 (City Not Found) error
+    if (error.response && error.response.status === 404) {
+      setPlaceholder("City not found. Please enter a valid city.");
+    } else {
+      setPlaceholder("An error occurred while fetching weather data. Please try again later.");
+    }
+
+    setCity("")
+
+
     }
   };
 
@@ -57,7 +74,7 @@ const Weather = () => {
       <div className="search-bar-container">
         <input
           type="text"
-          placeholder="Enter city name"
+          placeholder={placeholder}
           value={city}
           onChange={(e) => setCity(e.target.value)}
           className="input-city-name"
@@ -104,7 +121,6 @@ const Weather = () => {
       )}
     <Navbar />
     </div>
-    );
+   );
   };
 
-export default Weather;
