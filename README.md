@@ -117,14 +117,4 @@ npm start
 ```
 
 Open your browser and go to:  
-[http://localhost:3000](http://localhost:3000)
-
----
-
-## 🧪 Testing Notes for Markers
-
-- The app should auto-detect location (if allowed), or default to **London**  
-- You can also type a city manually to test  
-- The “Things to Do” section pulls live data from Google APIs via backend  
-- To simulate an invalid city, try searching gibberish (e.g., `asfdfasdf`)  
-- Weather data shows current and hourly forecast  
+[http://localhost:3000](http://localhost:3000) 
