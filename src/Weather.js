@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Weather.css";
 import Navbar from "./Navbar";
@@ -25,7 +24,7 @@ const Weather = ({city, setCity, weatherData, setWeatherData, forecastData, setF
     try {
       let weatherUrl;
       let forecastUrl;
-      
+    
       if (lat && lon) {
         weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
         forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
@@ -33,7 +32,7 @@ const Weather = ({city, setCity, weatherData, setWeatherData, forecastData, setF
         weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${API_KEY}`;
         forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${API_KEY}`;
       }
-  
+      
       const weatherResponse = await axios.get(weatherUrl);
       setWeatherData(weatherResponse.data);
       setCity(weatherResponse.data.name)
