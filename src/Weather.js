@@ -34,8 +34,9 @@ const Weather = ({city, setCity, weatherData, setWeatherData, forecastData, setF
         forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${API_KEY}`;
       }
   
-      const response = await axios.get(weatherUrl);
-      setWeatherData(response.data);
+      const weatherResponse = await axios.get(weatherUrl);
+      setWeatherData(weatherResponse.data);
+      setCity(weatherResponse.data.name)
 
       const forecastResponse = await axios.get(forecastUrl);
       setForecastData(forecastResponse.data.list.slice(0, 5));
@@ -92,7 +93,6 @@ const Weather = ({city, setCity, weatherData, setWeatherData, forecastData, setF
         <input
           type="text"
           placeholder={"Enter city name"}
-          value={city}
           onChange={(e) => setCity(e.target.value)}
           className="input-city-name"
         />

@@ -38,8 +38,13 @@
 }
   
 .weather-data h2 {
-  font-size: 50px;
-  margin: 0;
+  font-size: 50px; 
+  margin: 10px 0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  max-width: 100%;
 }
 
 .weather-icon img{
