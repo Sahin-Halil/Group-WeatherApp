@@ -11,7 +11,7 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = process.env.REACT_APP_ACTIVITIES_API_KEY; 
+const API_KEY = process.env.ACTIVITIES_API_KEY;
 
 app.get("/places", async (req, res) => {
   try {
@@ -40,7 +40,7 @@ app.get("/places", async (req, res) => {
     if (placesData.status !== "OK") {
         return res.status(500).json({ error: placesData.error_message });
       }
-  
+    
     const filteredPlaces = placesData.results.slice(0, 5).map((place) => ({
         name: place.name,
         area: place.vicinity,
