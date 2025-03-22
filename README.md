@@ -1,79 +1,130 @@
-# 🌤 Weather App  
-A simple weather forecast app built with **React** and **OpenWeather API**.  
+# 🌤 Weather App
 
----
-## heads up
-the .env file is ignored in Git, so everyone needs to create their own local .env file to make the weather API work.
+📖 **Overview**  
+This project was developed as part of our coursework for **ECS522W Graphical User Interface (GUI)** at **Queen Mary University of London**.  
+The goal is to provide users with weather forecasts and local activity suggestions based on their location.  
 
-📌 Steps to set up the API key locally:  
-1️⃣ Create a new .env file inside the weather-app project folder.  
-2️⃣ Add this inside it:  
-  REACT_APP_WEATHER_API_KEY = b29c6dcf39f9032ef46114505c791779  
+It was built collaboratively by a group of students using modern web technologies, APIs, and a modular frontend/backend architecture.
 
 ---
 
+## 👥 Team Members
 
-## 📁 Project Structure (src Files)  
-
-- **`App.js`** → Main component that renders the Weather component.  
-- **`Weather.js`** → Handles API calls, user input, and displays weather data.  
-- **`index.js`** → Entry point for the React app.  
-- **`App.css`** → Styles for the app.  
-
----
-
-### 📌 Where Most of the Work Will Be Done  
-
-Most of the core functionality will be implemented in **`Weather.js`**, as this file handles:  
-- Fetching weather data from the **OpenWeather API**  
-- Managing **user input** for city searches  
-- Updating and displaying **weather information** dynamically  
-
-Other files like **`App.js`** will mainly serve as a container for components, while **`App.css`** will handle styling.  
-
-Additional features such as **unit toggles, geolocation, and notifications** will also be added within `Weather.js`, with supporting updates in other components if needed.
+| Name           | Student Email              |
+|----------------|----------------------------|
+| Sahin Halil    | s.halil@se23.qmul.ac.uk    |
+| Molly Hall     | m.hall@se23.qmul.ac.uk     |
+| Yaseen Haque   | y.hassan@se23.qmul.ac.uk   |
+| Jishad Hoque   | j.hoque@se23.qmul.ac.uk    |
+| Yaqub Hassan   | y.hassan@se23.qmul.ac.uk   |
 
 ---
 
-## 🚀 How to Run the App  
+## 💡 Features
 
-### Clone the repository:  
+- 🌦 **Weather Forecast**: Fetches current weather and 5-hour forecast using OpenWeather API  
+- 🏞 **Activity Recommendations**: Suggests nearby places of interest using the Google Places API  
+- 📍 **Geolocation Support**: Detects your location to provide tailored weather and activity info  
+- 🔎 **City Search**: Users can enter a city name manually to retrieve data  
+- ⚙️ **Backend Server**: Node.js + Express handles activity API requests securely  
+- 📱 **Responsive Design**: Mobile-friendly layout using React and custom CSS  
+- 🧭 **Navigation Bar**: Seamless navigation through the app  
 
-git clone https://github.com/Yazeenn/weather-app.git  
+---
+
+## 🧪 Technologies Used
+
+- **Frontend**: React  
+- **Backend**: Node.js, Express  
+- **APIs**:  
+  - [OpenWeatherMap API](https://openweathermap.org/api)  
+  - [Google Places API](https://developers.google.com/maps/documentation/places/web-service/overview)  
+  - [Geocoding API](https://developers.google.com/maps/documentation/geocoding/start)  
+
+---
+
+## 📦 Installation
+
+### 1️⃣ Install Node.js & npm  
+If you don’t have Node.js installed:  
+Download it from [https://nodejs.org](https://nodejs.org) and install the **LTS** version.  
+Make sure to check “**Add to PATH**” during installation.
+
+To verify:
+```bash
+node -v
+npm -v
+```
+
+---
+
+### 2️⃣ Clone the Repository
+```bash
+git clone https://github.com/Yazeenn/weather-app.git
 cd weather-app
-### Install dependencies:
+```
+
+---
+
+### 3️⃣ Install Dependencies
+
+#### 🔧 Backend
+```bash
+cd backend
 npm install
+```
 
-npm install react-router-dom
-### Start the app:
+#### 💻 Frontend
+```bash
+cd ../weather-app
+npm install
+```
+
+---
+
+### 4️⃣ Set Environment Variables
+
+Create a `.env` file in **both** the frontend (`weather-app`) and backend folders.
+
+#### `weather-app/.env`:
+```env
+REACT_APP_WEATHER_API_KEY=b29c6dcf39f9032ef46114505c791779
+```
+
+#### `backend/.env`:
+```env
+ACTIVITIES_API_KEY=AIzaSyAJGn2aw7rmJfLkyEsHSJfr4lB79QJamzk
+```
+
+> 🛡️ **Note:** These keys are required to fetch weather and activity data. They are already embedded for demonstration/marking purposes.
+
+---
+
+### 🏃‍♂️ Run the Project
+
+In **two terminal windows**:
+
+#### 🖥 Backend
+```bash
+cd backend
+node server.js
+```
+
+#### 🌐 Frontend
+```bash
+cd weather-app
 npm start
+```
 
-### Open http://localhost:3000/ in your browser.
-
----
-
-## 🌍 What the App Does So Far
-### ✅ Allows users to enter a city name and fetch weather data.
-### ✅ Displays temperature, weather conditions, humidity, and wind speed.
-### ✅ Uses Axios to fetch data from the OpenWeather API.
+Open your browser and go to:  
+[http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🔜 Next Steps
-🔹 Improve the UI and styling  
-🔹 Add location detection (Geolocation API)  
-🔹 Implement 7-day weather forecasts  
-🔹 Add unit toggle (°C/°F) and user settings  
+## 🧪 Testing Notes for Markers
 
----
-
-## 👥 Team Instructions
-### Pull the latest version before making changes:
-git pull origin main
-### Work on a separate branch:
-git checkout -b feature-branch-name
-### After changes, commit and push your branch:
-git add .  
-git commit -m "Short description of changes"  
-git push origin feature-branch-name  
-### Create a Pull Request (PR) on GitHub and request a review before merging to main.
+- The app should auto-detect location (if allowed), or default to **London**  
+- You can also type a city manually to test  
+- The “Things to Do” section pulls live data from Google APIs via backend  
+- To simulate an invalid city, try searching gibberish (e.g., `asfdfasdf`)  
+- Weather data shows current and hourly forecast  
