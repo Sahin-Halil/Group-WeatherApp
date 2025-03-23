@@ -76,7 +76,7 @@ npm install
 
 #### 💻 Frontend
 ```bash
-cd ../weather-app
+cd ../
 npm install
 ```
 
