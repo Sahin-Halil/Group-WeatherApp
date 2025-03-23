@@ -96,8 +96,6 @@ REACT_APP_WEATHER_API_KEY=b29c6dcf39f9032ef46114505c791779
 ACTIVITIES_API_KEY=AIzaSyAJGn2aw7rmJfLkyEsHSJfr4lB79QJamzk
 ```
 
-> 🛡️ **Note:** These keys are required to fetch weather and activity data. They are already embedded for demonstration/marking purposes.
-
 ---
 
 ### 🏃‍♂️ Run the Project
