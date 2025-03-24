@@ -1,0 +1,119 @@
+.settings-container {
+    position: relative;
+    width: 393px;
+    height: 750px;
+    margin: auto;
+    padding: 20px;
+    background: #64cdfa; 
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .settings-container h1 {
+    font-size: 34px; 
+    font-weight: bold; 
+    margin-bottom: 20px;
+    color: white; 
+  }
+  
+  .settings-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+  
+  .settings-list::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    color: #333;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .setting-item:hover {
+    background: #f0f8ff;
+    transform: scale(1.02);
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .setting-label {
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .setting-control {
+    text-align: right;
+  }
+  
+  .setting-toggle {
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .setting-toggle::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    top: 1px;
+    left: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  .setting-toggle:checked {
+    background: #4caf50;
+  }
+  
+  .setting-toggle:checked::before {
+    transform: translateX(20px);
+  }
+  
+  .select-dropdown {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    background: white;
+  }
+  
+  button.save-settings {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: #4caf50;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  button.save-settings:hover {
+    background: #388e3c;
+  }
+  
