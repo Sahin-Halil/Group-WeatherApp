@@ -1,23 +1,31 @@
+* General settings container */
 .settings-container {
     position: relative;
     width: 393px;
     height: 750px;
     margin: auto;
     padding: 20px;
-    background: #64cdfa; 
+    background: #64cdfa;
     border-radius: 20px;
     text-align: center;
     color: white;
     font-family: "Arial", sans-serif;
   }
   
-  .settings-container h1 {
-    font-size: 34px; 
-    font-weight: bold; 
-    margin-bottom: 20px;
-    color: white; 
+  /* Dark Mode Styling */
+  body.dark-mode .settings-container {
+    background: #333; /* Darker background for dark mode */
   }
   
+  /* Title styling */
+  .settings-container h1 {
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: white; /* Always white in dark mode */
+  }
+  
+  /* Settings list styling */
   .settings-list {
     list-style: none;
     padding: 0;
@@ -30,6 +38,7 @@
     display: none;
   }
   
+  /* Individual setting item */
   .setting-item {
     display: flex;
     justify-content: space-between;
@@ -42,23 +51,43 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
+  /* Dark Mode individual setting item */
+  body.dark-mode .setting-item {
+    background: #555; /* Darker background for items in dark mode */
+    color: white; /* White text in dark mode */
+  }
+  
+  /* Hover effect for settings item */
   .setting-item:hover {
     background: #f0f8ff;
     transform: scale(1.02);
     transition: all 0.2s ease-in-out;
   }
   
+  /* Dark Mode hover effect */
+  body.dark-mode .setting-item:hover {
+    background: #444; /* Darker hover background */
+  }
+  
+  /* Label styling */
   .setting-label {
     text-align: left;
     font-size: 16px;
     font-weight: bold;
-    color: #333;
+    color: #333; /* Light text in light mode */
   }
   
+  /* Dark Mode label styling */
+  body.dark-mode .setting-label {
+    color: white; /* White text in dark mode */
+  }
+  
+  /* Control section styling */
   .setting-control {
     text-align: right;
   }
   
+  /* Toggle switch styling */
   .setting-toggle {
     appearance: none;
     width: 40px;
@@ -82,14 +111,21 @@
     transition: all 0.3s ease;
   }
   
-  .setting-toggle:checked {
+  /* Dark Mode toggle styling */
+  body.dark-mode .setting-toggle {
+    background: #888; /* Dark toggle background */
+  }
+  
+  /* Dark Mode toggle switch movement */
+  body.dark-mode .setting-toggle:checked {
     background: #4caf50;
   }
   
-  .setting-toggle:checked::before {
+  body.dark-mode .setting-toggle:checked::before {
     transform: translateX(20px);
   }
   
+  /* Dropdown menu styling */
   .select-dropdown {
     padding: 5px;
     border: 1px solid #ccc;
@@ -99,6 +135,14 @@
     background: white;
   }
   
+  /* Dark Mode dropdown menu */
+  body.dark-mode .select-dropdown {
+    color: white; /* White text in dark mode */
+    background: #444; /* Darker background for dropdown */
+    border-color: #888; /* Dark border color */
+  }
+  
+  /* Save button styling */
   button.save-settings {
     width: 100%;
     margin-top: 20px;
@@ -111,6 +155,19 @@
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
+  }
+  
+  /* Dark Mode save button */
+  body.dark-mode button.save-settings {
+    background: #388e3c;
+  }
+  
+  button.save-settings:hover {
+    background: #388e3c;
+  }
+  
+  body.dark-mode button.save-settings:hover {
+    background: #2c6e2c; /* Darker hover background for dark mode */
   }
   
   button.save-settings:hover {
