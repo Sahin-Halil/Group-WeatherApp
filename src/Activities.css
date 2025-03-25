@@ -11,11 +11,19 @@
   font-family: "Arial", sans-serif;
 }
 
+body.dark-mode .activities-container {
+  background: #333; 
+}
+
 .activities-container h1 {
   font-size: 34px; 
   font-weight: bold; 
   margin-bottom: 20px;
   color: white; 
+}
+
+body.dark-mode .activities-container h1 {
+  color: white;
 }
 
 .places-list {
@@ -26,9 +34,11 @@
   overflow-y: auto; 
 }
 
+
 .places-list::-webkit-scrollbar {
   display: none; 
 }
+
 
 .place-item {
   flex-direction: column; 
@@ -39,6 +49,25 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
+
+
+body.dark-mode .place-item {
+  background: #555; 
+  color: white; /* White text in dark mode */
+}
+
+
+.place-item:hover {
+  background: #f0f8ff; 
+  transform: scale(1.02); 
+  transition: all 0.2s ease-in-out;
+}
+
+
+body.dark-mode .place-item:hover {
+  background: #444; /* Darker hover background */
+}
+
 
 .place-info {
   text-align: left; 
@@ -51,10 +80,18 @@
   color: #333;
 }
 
+body.dark-mode .place-info h3 {
+  color: white; 
+}
+
 .place-info p {
   margin: 5px 0;
   font-size: 14px;
   color: #666;
+}
+
+body.dark-mode .place-info p {
+  color: #ccc; 
 }
 
 .place-info p:first-of-type {
@@ -62,12 +99,14 @@
   color: #333; 
 }
 
+body.dark-mode .place-info p:first-of-type {
+  color: white;
+}
+
 .place-info p:last-of-type {
   font-style: italic;
 }
 
-.place-item:hover {
-  background: #f0f8ff; 
-  transform: scale(1.02); 
-  transition: all 0.2s ease-in-out;
+body.dark-mode .place-info p:last-of-type {
+  color: #bbb; 
 }
