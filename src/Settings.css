@@ -51,9 +51,11 @@
   }
   
  
-    background: #555; 
-    color: white; 
+  body.dark-mode .setting-item {
+    background: #555;
+    color: white;
   }
+  
   
  
   .setting-item:hover {
