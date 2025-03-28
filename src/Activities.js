@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
 import "./Activities.css";
 
 const Activities = ({ city }) => {
@@ -37,7 +36,6 @@ const Activities = ({ city }) => {
       ) : (
         <p>No places found.</p>
       )}
-    <Navbar />
     </div>
   );
 };
