@@ -128,21 +128,23 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
   };
 
   return (
+    <div className="weather-page">
+    <div className="navbar">
+      <Link to="/Activities" className="nav-button">
+        <img src="/activities-icon.png" />
+        Activities
+      </Link>
+      <Link to="/Weather" className="nav-button">
+        <img src="/weather-icon.png" />
+        Weather
+      </Link>
+      <Link to="/Settings" className="nav-button">
+        <img src="/settings-icon.png" />
+        Settings
+      </Link>
+    </div>
+
     <div className="weather-container">
-      <div className="navbar">
-        <Link to="/Activities" className="nav-button">
-          <img src="/activities-icon.png" />
-          Activities
-        </Link>
-        <Link to="/Weather" className="nav-button">
-          <img src="/weather-icon.png" />
-          Weather
-        </Link>
-        <Link to="/Settings" className="nav-button">
-          <img src="/settings-icon.png" />
-          Settings
-        </Link>
-      </div>
 
       <div className="main-content">
         <div className="searchbar">
@@ -207,6 +209,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
           </MapContainer>
         )}
       </div>
+    </div>
     </div>
   );
 };
