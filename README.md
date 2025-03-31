@@ -78,7 +78,7 @@ npm install
 ```bash
 cd ../
 npm install
-npm install leaflet
+npm install leaflet react-leaflet
 ```
 
 ---
