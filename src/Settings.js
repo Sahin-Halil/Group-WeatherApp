@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
 import './Settings.css';
+import { Link } from 'react-router-dom';
 
 const Settings = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -53,9 +53,23 @@ const Settings = () => {
   };
 
   return (
+    <div className="outer-div">
     <div className="settings-container">
       {/* Navbar */}
-      <Navbar />
+      <div className="navbar">
+        <Link to="/Activities" className="nav-button">
+          <img src="/activities-icon.png" />
+          Activities
+        </Link>
+        <Link to="/Weather" className="nav-button">
+          <img src="/weather-icon.png" />
+          Weather
+        </Link>
+        <Link to="/Settings" className="nav-button">
+          <img src="/settings-icon.png" />
+          Settings
+        </Link>
+      </div>
 
       {/* Settings Content */}
       <h1>Settings</h1>
@@ -104,6 +118,7 @@ const Settings = () => {
       </ul>
 
       <button className="save-settings" onClick={saveSettings}>Save Settings</button>
+    </div>
     </div>
   );
 };

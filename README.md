@@ -78,6 +78,7 @@ npm install
 ```bash
 cd ../
 npm install
+npm install leaflet
 ```
 
 ---
