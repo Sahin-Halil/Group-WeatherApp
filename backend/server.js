@@ -41,11 +41,30 @@ app.get("/places", async (req, res) => {
         return res.status(500).json({ error: placesData.error_message });
       }
     
-    const filteredPlaces = placesData.results.slice(0, 5).map((place) => ({
+    const allowedTypes = [
+      "tourist_attraction",
+      "museum",
+      "park",
+      "restaurant",
+      "cafe",
+      "art_gallery",
+      "amusement_park",
+      "zoo",
+      "aquarium",
+      "shopping_mall",
+      "church",
+      "mosque"
+    ];
+    
+    const filteredPlaces = placesData.results.slice(0, 5).map((place) => {
+      const matchedType = place.types?.find((t) => allowedTypes.includes(t)) || "other";
+      return {
         name: place.name,
         area: place.vicinity,
         rating: place.rating,
-    }));
+        type: matchedType, 
+      };
+    });
     
     res.json(filteredPlaces);
   } catch (error) {

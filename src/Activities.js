@@ -9,29 +9,83 @@ const translations = {
     weatherNavbar: "Weather",
     settingsNavbar: "Settings",
     thingsToDoTitle: "Things to do in {city}",
+    ratingPlaces: "Rating",
+    locationOffPlaces: "Location",
+    descriptionLabel: "Description",
+    typeDescriptions: {
+      museum: "A place to explore history and art",
+      park: "A relaxing outdoor space",
+      tourist_attraction: "A popular tourist attraction",
+      church: "A historic religious site",
+      mosque: "A peaceful place of worship",
+      cafe: "A cozy place for coffee",
+      restaurant: "A place to eat",
+      zoo: "See animals up close",
+      aquarium: "Underwater life on display",
+      art_gallery: "Explore artistic works",
+      amusement_park: "Exciting rides and games",
+      shopping_mall: "Shop and explore",
+      other: "A local place of interest"
+    }
   },
   es: {
     activitiesNavbar: "Actividades",
     weatherNavbar: "Clima",
     settingsNavbar: "Configuración",
     thingsToDoTitle: "Cosas que hacer en {city}",
+    ratingPlaces: "Calificación",
+    locationOffPlaces: "Ubicación",
+    descriptionLabel: "Descripción",
+    typeDescriptions: {
+      museum: "Un lugar para explorar historia y arte",
+      park: "Un espacio al aire libre para relajarse",
+      tourist_attraction: "Una atracción turística popular",
+      church: "Un sitio religioso histórico",
+      mosque: "Un lugar de oración y paz",
+      cafe: "Un lugar acogedor para café",
+      restaurant: "Un sitio para comer",
+      zoo: "Ver animales de cerca",
+      aquarium: "Vida marina en exhibición",
+      art_gallery: "Explorar obras de arte",
+      amusement_park: "Diversión y juegos emocionantes",
+      shopping_mall: "Ir de compras y explorar",
+      other: "Un sitio local interesante"
+    }
   },
   fr: {
     activitiesNavbar: "Activités",
     weatherNavbar: "Météo",
     settingsNavbar: "Paramètres",
     thingsToDoTitle: "Choses à faire à {city}",
-  },
+    ratingPlaces: "Évaluation",
+    locationOffPlaces: "Emplacement",
+    descriptionLabel: "Description",
+    typeDescriptions: {
+      museum: "Un endroit pour explorer l'histoire et l'art",
+      park: "Un espace extérieur relaxant",
+      tourist_attraction: "Une attraction touristique populaire",
+      church: "Un site religieux historique",
+      mosque: "Un lieu de prière paisible",
+      cafe: "Un café accueillant",
+      restaurant: "Un endroit pour manger",
+      zoo: "Voir des animaux de près",
+      aquarium: "Découvrir la vie marine",
+      art_gallery: "Explorer des œuvres d'art",
+      amusement_park: "Jeux et manèges amusants",
+      shopping_mall: "Faire du shopping et explorer",
+      other: "Un endroit local intéressant"
+    }
+  }
 };
+
 
 const Activities = ({ city }) => {
   const [places, setPlaces] = useState([]);
   const [language, setLanguage] = useState(localStorage.getItem("language") || "en");
-  const [translatedLabels, setTranslatedLabels] = useState(translations[language]);
-
+  const [translatedLabels, setTranslatedLabels] = useState(translations[language] || translations["en"]);
   useEffect(() => {
     fetchPlaces(city);
-    setTranslatedLabels(translations[language]); // Update labels when language changes
+    setTranslatedLabels(translations[language] || translations["en"]); // Update labels when language changes
   }, [city, language]);
 
   const fetchPlaces = async (city) => {
@@ -48,8 +102,13 @@ const Activities = ({ city }) => {
     return translatedLabels[text]?.replace("{city}", city) || text;
   };
 
+  const getTranslatedTypeDescription = (type) => {
+    return translatedLabels.typeDescriptions?.[type] || translatedLabels.typeDescriptions?.other;
+  };
+
   return (
     <div className="outer-div">
+      <h1 className="activities-title">{translateTitle("thingsToDoTitle")}</h1>
       <div className="activities-container">
         <div className="navbar">
           <Link to="/Activities" className="nav-button">
@@ -66,22 +125,21 @@ const Activities = ({ city }) => {
           </Link>
         </div>
 
-        <h1>{translateTitle("thingsToDoTitle")}</h1> {/* Update title with translated text */}
-
         {places.length > 0 ? (
           <ul className="places-list">
             {places.map((place) => (
               <li key={place.name} className="place-item">
                 <div className="place-info">
                   <h3>{place.name}</h3>
-                  <p>Rating: {place.rating || "No rating available"}</p>
-                  <p>Location: {place.area || "No location available"}</p>
+                  <p>{translatedLabels.ratingPlaces}: {place.rating}</p>
+                  <p><strong>{translatedLabels.locationOffPlaces}:</strong> {place.area}</p>
+                  <p><strong>{translatedLabels.descriptionLabel}:</strong> {getTranslatedTypeDescription(place.type)}</p>
                 </div>
               </li>
             ))}
           </ul>
         ) : (
-          <p>No places found.</p>
+          <p></p>
         )}
       </div>
     </div>

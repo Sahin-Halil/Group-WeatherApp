@@ -148,9 +148,8 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
       } else {
         weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${API_KEY}`;
         forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${API_KEY}`;
-        airQualityUrl = `https://api.openweathermap.org/data/2.5/air_pollution?q=${location}&appid=${API_KEY}`;
+        airQualityUrl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
         uviUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
-
       }
 
       const weatherResponse = await axios.get(weatherUrl);
@@ -161,19 +160,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
         const lon = weatherResponse.data.coord.lon;
         setCoordinates({ lat, lon }); // Update coordinates
       }
-
-      const forecastResponse = await axios.get(forecastUrl);
-      if (forecastResponse.data) {
-        const hourlyForecast = forecastResponse.data.list.filter((entry, index) => index < 6);
-        setForecastData(hourlyForecast);
-      }
-
-      const airQualityResponse = await axios.get(airQualityUrl);
-      if (airQualityResponse.data) {
-        console.log("Air quality: ", airQualityResponse.data);
-        setAirQualityData(airQualityResponse.data);
-      }
-
+      
       const uviResponse = await axios.get(uviUrl);
       if (uviResponse.data) {
         console.log("UV Index: ", uviResponse.data.value);
@@ -182,10 +169,26 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
           uvi: uviResponse.data.value,
         }));
       }
+
+      const airQualityResponse = await axios.get(airQualityUrl);
+      if (airQualityResponse.data) {
+        console.log("Air quality: ", airQualityResponse.data);
+        setAirQualityData(airQualityResponse.data);
+      }
+
+      const forecastResponse = await axios.get(forecastUrl);
+      if (forecastResponse.data) {
+        const hourlyForecast = forecastResponse.data.list.filter((entry, index) => index < 5);
+        setForecastData(hourlyForecast);
+      }
+      
+
     } catch (error) {
       console.log(error);
       if (error.response) {
+        console.log(error.response)
         alert("City not found. Please enter a valid city.");
+        return;
       } else {
         alert("An error occurred while fetching weather data. Please try again later.");
       }
@@ -345,18 +348,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
         )}
       </div>
     </div>
-
-    <Settings 
-      weatherMetrics={weatherMetrics} 
-      setWeatherMetrics={setWeatherMetrics} 
-      language={language} 
-      setLanguage={setLanguage} 
-      unit={unit} 
-      setUnit={setUnit} 
-    />
-
-    </div>
-
+ </div>
   );
 };
 

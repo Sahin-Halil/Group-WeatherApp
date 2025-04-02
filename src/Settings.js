@@ -139,6 +139,7 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
     setWeatherMetrics(metrics);
     localStorage.setItem('metrics', JSON.stringify(metrics));
     localStorage.setItem('unit', unit);
+    alert("Settings Changes have been saved.")
   }
 
   const metricsKeys = metrics && Object.keys(metrics);
