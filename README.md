@@ -14,7 +14,7 @@ It was built collaboratively by a group of students using modern web technologie
 |----------------|----------------------------|
 | Sahin Halil    | s.halil@se23.qmul.ac.uk    |
 | Molly Hall     | m.hall@se23.qmul.ac.uk     |
-| Yaseen Haque   | y.hassan@se23.qmul.ac.uk   |
+| Yaseen Haque   | m.haque@se23.qmul.ac.uk   |
 | Jishad Hoque   | j.hoque@se23.qmul.ac.uk    |
 | Yaqub Hassan   | y.hassan@se23.qmul.ac.uk   |
 
