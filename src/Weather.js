@@ -332,16 +332,16 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
 
             <div className="weather-details">
               {weatherMetrics.windSpeed && (
-                <p>🌬 {convertWindSpeed(weatherData.wind.speed)} {unit === "Celsius" ? "km/h" : "mph"}</p>
+                <p>🌬 WS  {convertWindSpeed(weatherData.wind.speed)} {unit === "Celsius" ? "km/h" : "mph"}</p>
               )}
               {weatherMetrics.precipitation && (
-                <p>☔ {weatherData.rain ? weatherData.rain["1h"] : 0} mm</p>
+                <p>☔ RF  {weatherData.rain ? weatherData.rain["1h"] : 0} mm</p>
               )}
               {weatherMetrics.uvIndex && uvIndex !== null && (
-                <p>☀️ UV {uvIndex}</p>
+                <p>☀️ UV  {uvIndex}</p>
               )}
               {weatherMetrics.airQuality && airQualityData?.list[0]?.main?.aqi && (
-                <p>💨 AQ: {airQualityData.list[0].main.aqi}</p>
+                <p>💨 AQ {airQualityData.list[0].main.aqi}</p>
               )}
             </div>
 
