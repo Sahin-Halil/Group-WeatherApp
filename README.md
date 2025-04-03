@@ -2,6 +2,7 @@
 
 📖 **Overview**  
 This project was developed as part of our coursework for **ECS522U Graphical User Interface (GUI)** at **Queen Mary University of London**.  
+
 The goal is to provide users with weather forecasts and local activity suggestions based on their location.  
 
 It was built collaboratively by a group of students using modern web technologies, APIs, and a modular frontend/backend architecture.
@@ -22,13 +23,17 @@ It was built collaboratively by a group of students using modern web technologie
 
 ## 💡 Features
 
-- 🌦 **Weather Forecast**: Fetches current weather and 5-hour forecast using OpenWeather API  
-- 🏞 **Activity Recommendations**: Suggests nearby places of interest using the Google Places API  
-- 📍 **Geolocation Support**: Detects your location to provide tailored weather and activity info  
-- 🔎 **City Search**: Users can enter a city name manually to retrieve data  
-- ⚙️ **Backend Server**: Node.js + Express handles activity API requests securely  
-- 📱 **Responsive Design**: Mobile-friendly layout using React and custom CSS  
-- 🧭 **Navigation Bar**: Seamless navigation through the app  
+- 🌦 **Weather Forecast**: Fetches current weather and 5-hour forecast using the OpenWeather API  
+- 🏞 **Activity Recommendations**: Suggests nearby places of interest using the Google Places API, and Geolocation API to provide results based on the user's desired location  
+- 📍 **GPS Support**: Automatically detects user location for tailored updates  
+- 🔎 **City Search**: Users can enter a city name manually to retrieve weather and location-based activity data  
+- 🗺️ **Interactive Map**: Displays a live map using Leaflet with a marker for the user's current or searched location  
+- ⚙️ **Backend Server**: Node.js + Express backend handles activity API requests securely
+- 📱 **Responsive Design**: Mobile-friendly layout using React and custom CSS that adapts to all screen sizes  
+- 🧭 **Navigation Bar**: Seamless navigation between Weather, Activities, and Settings pages with persistent bottom nav for mobile users  
+- 🌡️ **Unit Toggle**: Switch between Celsius and Fahrenheit temperature units  
+- 🌬️ **Metric Customisation**: Toggle display of key weather metrics like wind speed, precipitation, UV index, and air quality  
+- 🗣️ **Multilingual Support**: App supports English, Spanish, and French, with translations applied across the UI  
 
 ---
 
@@ -115,5 +120,10 @@ cd weather-app
 npm start
 ```
 
-Open your browser and go to:  
-[http://localhost:3000](http://localhost:3000) 
+---
+
+## 🚀 Launch the App
+
+Once both frontend and backend are running, open your browser and navigate to:
+
+[http://localhost:3000](http://localhost:3000)
