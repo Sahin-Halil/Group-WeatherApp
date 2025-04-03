@@ -1,12 +1,12 @@
-// App.js
-// Main application component that handles routing and shared state (city, weather data, language, metrics)
-
 import React from "react";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Weather from "./Weather";
 import Activities from "./Activities";
 import Settings from "./Settings";
+
+// App.js
+// Main application component that handles routing and shared state (city, weather data, language, metrics)
 
 function App() {
   const [city, setCity] = useState("");

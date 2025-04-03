@@ -1,9 +1,9 @@
-// Activities.js
-// Displays a list of interesting places in the selected city, with multilingual support.
-
 import React, { useState, useEffect } from "react";
 import "./Activities.css";
 import { Link } from "react-router-dom";
+
+// Activities.js
+// Displays a list of interesting places in the selected city, with multilingual support.
 
 const translations = {
   // static translations for english, spanish and french
