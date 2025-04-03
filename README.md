@@ -1,7 +1,7 @@
 # 🌤 Weather App
 
 📖 **Overview**  
-This project was developed as part of our coursework for **ECS522W Graphical User Interface (GUI)** at **Queen Mary University of London**.  
+This project was developed as part of our coursework for **ECS522U Graphical User Interface (GUI)** at **Queen Mary University of London**.  
 The goal is to provide users with weather forecasts and local activity suggestions based on their location.  
 
 It was built collaboratively by a group of students using modern web technologies, APIs, and a modular frontend/backend architecture.
