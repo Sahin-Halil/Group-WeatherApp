@@ -16,6 +16,7 @@ app.use(express.json());
 
 const API_KEY = process.env.ACTIVITIES_API_KEY; // Google Maps API key from .env
 
+// Endpoint to fetch nearby places based on a city name.
 app.get("/places", async (req, res) => {
   try {
     const { city } = req.query;
@@ -36,7 +37,7 @@ app.get("/places", async (req, res) => {
 
     const { lat, lng } = geoData.results[0].geometry.location;
 
-    // fetch nearby tourist attractions and places od interest
+    // fetch nearby tourist attractions and places of interest
     const placesResponse = await fetch(
       `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=5000&type=tourist_attraction&key=${API_KEY}`
     );
@@ -46,6 +47,7 @@ app.get("/places", async (req, res) => {
         return res.status(500).json({ error: placesData.error_message });
       }
     
+    // Define the allowed types of places to filter results.
     const allowedTypes = [
       "tourist_attraction",
       "museum",
@@ -79,6 +81,7 @@ app.get("/places", async (req, res) => {
   }
 });
 
+// Start the server and listen on the specified port.
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

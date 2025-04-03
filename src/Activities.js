@@ -3,7 +3,8 @@ import "./Activities.css";
 import { Link } from "react-router-dom";
 
 // Activities.js
-// Displays a list of interesting places in the selected city, with multilingual support.
+// This component displays a list of interesting places in the selected city.
+// It supports multilingual translations for labels and descriptions.
 
 const translations = {
   // static translations for english, spanish and french
@@ -87,11 +88,14 @@ const Activities = ({ city }) => {
   const [language, setLanguage] = useState(localStorage.getItem("language") || "en");
   // load saved language from LocalStorage, falls back to english
   const [translatedLabels, setTranslatedLabels] = useState(translations[language] || translations["en"]);
+
+  // Effect to fetch places and update translations when the city or language changes
   useEffect(() => {
     fetchPlaces(city);
     setTranslatedLabels(translations[language] || translations["en"]); // Update labels when language changes
   }, [city, language]);
 
+  // Function to fetch places from the backend API
   const fetchPlaces = async (city) => {
     try {
       const response = await fetch(`http://localhost:5000/places?city=${city}`);
@@ -102,18 +106,24 @@ const Activities = ({ city }) => {
     }
   };
 
+  // Function to translate the title with dynamic city replacement
   const translateTitle = (text) => {
     return translatedLabels[text]?.replace("{city}", city) || text;
   };
 
+  // Function to get the translated description for a place type
   const getTranslatedTypeDescription = (type) => {
     return translatedLabels.typeDescriptions?.[type] || translatedLabels.typeDescriptions?.other;
   }; // fallback to 'other' if language or city changes
 
   return (
     <div className="outer-div">
+      {/* Title for the activities page */}
       <h1 className="activities-title">{translateTitle("thingsToDoTitle")}</h1>
+
+      {/* Container for activities and navigation */}
       <div className="activities-container">
+        {/* Navbar for navigation */}
         <div className="navbar">
           <Link to="/Activities" className="nav-button">
             <img src="/activities-icon.png" alt="activities icon" />
@@ -129,6 +139,7 @@ const Activities = ({ city }) => {
           </Link>
         </div>
 
+        {/* List of places */}
         {places.length > 0 ? (
           <ul className="places-list">
             {places.map((place) => (

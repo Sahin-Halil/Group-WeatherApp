@@ -29,6 +29,7 @@ const customMarker = new L.Icon({
 });
 
 const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, setForecastData }) => {
+  // State variables for managing weather data, user preferences, and metrics
   const [coordinates, setCoordinates] = useState({ lat: 51.5074, lon: -0.1278 }); // defaults to London
   const [marker, setMarker] = useState(null);
   const [airQualityData, setAirQualityData] = useState(null);
@@ -61,6 +62,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
     translateAllLabels(language);
   }, [language]);
 
+  // Function to translate individual text based on the selected language
   const translateText = async (text, targetLang) => {
     const translations = {
       en: { "Enter city name": "Enter city name", "Settings": "Settings", "Weather": "Weather", "Activities": "Activities" },
@@ -70,6 +72,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
     return translations[targetLang]?.[text] || text;
   };
 
+  // Function to translate all UI labels
   const translateAllLabels = async (targetLang) => {
     const labels = {
       searchPlaceholder: "Enter city name",
@@ -89,6 +92,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
     setTranslatedLabels(translatedLabels);
   }
 
+  // Effect to load saved unit and metrics preferences from localStorage
   useEffect(() => {
     const savedUnit = localStorage.getItem("unit") || "Celsius";
     setUnit(savedUnit);
@@ -103,6 +107,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
     setWeatherMetrics(savedMetrics);
   }, [unit]);
 
+  // Utility functions for temperature and wind speed conversions
   const convertTemperature = (temp) => {
     return unit === "Celsius" ? Math.round(temp) : Math.round((temp * 9) / 5 + 32);
   }
@@ -111,6 +116,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
     return unit === "Celsius" ? speed : (speed * 0.621371).toFixed(1);
   }
 
+  // Effect to fetch user's location if no weather data is available
   useEffect(() => {
     if (!weatherData) {
       getUserLocation();
@@ -137,6 +143,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
     }
   }, [weatherMetrics.airQuality, coordinates, weatherData]);
 
+  // Effect to fetch UV index data when the metric is enabled
   useEffect(() => {
     if (weatherMetrics.uvIndex && coordinates.lat && coordinates.lon) {
       const fetchUvIndex = async () => {
@@ -253,6 +260,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
     }
   };
 
+  // Function to handle city search
   const handleSearch = () => {
     if (!city.trim()) {
       alert("Please enter a valid city.");
@@ -261,6 +269,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
     fetchWeather(city);
   };
 
+  // Function to fetch weather icons based on icon codes
   const fetchWeatherIcon = (iconCode) => {
     const icons = {
       "01d": ClearDay,
@@ -294,6 +303,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
     <div className="weather-page">
 
     <div className="navbar">
+      {/* Navbar Section */}
       <Link to="/Activities" className="nav-button">
         <img src="/activities-icon.png" />
         {translatedLabels.activitiesNavbar}
@@ -308,8 +318,9 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
       </Link>
     </div>
 
+    {/* Main Weather Container */}
     <div className="weather-container">
-
+      {/* Search Bar Section */}
       <div className="main-content">
         <div className="searchbar">
           <input
@@ -323,6 +334,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
           </button>
         </div>
 
+        {/* Weather Information Section */}
         {weatherData && (
           <div className="weather-info">
             <h2>{weatherData.name}</h2>
@@ -349,6 +361,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
               )}
             </div>
 
+            {/* Forecast Section */}
             {forecastData && forecastData.length > 0 && (
               <div className="forecast-container">
                 {forecastData.map((hour, index) => (
@@ -367,6 +380,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
         )}
       </div>
 
+      {/* Map Section */}
       <div className="map-container">
         {coordinates.lat && coordinates.lon && (
           <MapContainer

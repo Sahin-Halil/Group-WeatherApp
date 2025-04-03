@@ -78,8 +78,11 @@ const translations = {
   };
   
   export const translateText = (key, lang = 'en', variables = {}) => {
+    // Fetch the translation for the given key and language.
+    // If the key is not found in the specified language, fallback to English or return the key itself.
     let text = translations[lang]?.[key] || translations['en'][key] || key;
     
+    // Replace dynamic variables (e.g., {city}) in the text with the provided values.
     Object.keys(variables).forEach(varKey => {
       text = text.replace(`{${varKey}}`, variables[varKey]);
     });

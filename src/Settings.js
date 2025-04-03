@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 // Component for updating app settings: language, units, and weather metric preferences
 
 const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) => {
+  // State to manage weather metric preferences
   const [metrics, setMetrics] = useState(() => {
     // Load saved metric preferences from localStorage or use defaults
     const savedMetrics = localStorage.getItem("metrics");
@@ -36,6 +37,7 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
     }
   }, [metrics]);
 
+  // Function to toggle individual weather metric preferences
   const handleMetricChange = (metric) => {
     setMetrics((prevMetrics) => ({
       ...prevMetrics,
@@ -45,6 +47,7 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
 
   const [unit, setUnit] = useState(localStorage.getItem('unit') || "Celsius");
 
+  // State to manage translated labels for UI elements
   const [translatedLabels, setTranslatedLabels] = useState({
     settingsTitle: "Settings",
     weatherMetrics: "Weather Metrics",
@@ -60,6 +63,7 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
     windSpeed: "Wind Speed",
   });
 
+  // Function to handle checkbox changes for weather metrics
   const handleCheckboxChange = (e) => {
     const {name, checked} = e.target;
     setWeatherMetrics((prevMetrics) => ({
@@ -68,12 +72,14 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
     }));
   }
 
+  // Effect to load the saved language from localStorage on component mount
   useEffect(() => {
     const storedLang = localStorage.getItem("language") || "en";
     setLanguage(storedLang);
     translateAllLabels(storedLang); // Translate labels on mount
   }, []); // Run only once on mount
 
+  // Effect to re-translate labels whenever the language changes
   useEffect(() => {
     translateAllLabels(language); // Re-translate when the language changes
   }, [language]);
@@ -107,6 +113,7 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
     return translations[targetLang]?.[text] || text;
   };
 
+  // Function to translate all UI labels based on the selected language
   const translateAllLabels = async (targetLang) => {
     const labels = {
       settingsTitle: "Settings",
@@ -135,10 +142,12 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
     setTranslatedLabels(translatedLabels);
   };
 
+  // Function to handle changes in temperature unit preference
   const handleUnitChange = (event) => {
     setUnit(event.target.value);
   };
 
+  // Function to save all settings to localStorage
   const saveSettings = () => {
     setWeatherMetrics(metrics);
     localStorage.setItem('metrics', JSON.stringify(metrics));
@@ -147,6 +156,7 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
 
   const metricsKeys = metrics && Object.keys(metrics);
 
+  // Function to handle changes in language preference
   const handleLanguageChange = (newLang) => {
     console.log("Language changed to:", newLang);
     setLanguage(newLang);
@@ -157,6 +167,7 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
   return (
     <div className="outer-div">
       <div className="settings-container">
+        {/* Navbar for navigation */}
         <div className="navbar">
           <Link to="/Activities" className="nav-button">
             <img src="/activities-icon.png" alt="activities icon" />
@@ -174,6 +185,7 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
 
         <h1>{translatedLabels.settingsTitle}</h1>
 
+        {/* Weather Metrics Section */}
         <div className="settings-section">
           <h2>{translatedLabels.weatherMetrics}</h2>
           {/* Only try to render metrics if it's a valid object and contains keys */}
@@ -193,6 +205,7 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
           )}
         </div>
 
+        {/* Temperature Units Section */}
         <div className="settings-section">
           <h2>{translatedLabels.temperatureUnits}</h2>
           <label className="setting-item" id="celsius">
@@ -215,6 +228,7 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
           </label>
         </div>
 
+        {/* Language Selection Section */}
         <div className="settings-section">
           <h2>{translatedLabels.selectLanguage}</h2>
           <select value={language} onChange={(e) => handleLanguageChange(e.target.value)} className="language-dropdown">
@@ -224,6 +238,7 @@ const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) =>
           </select>
         </div>
 
+        {/* Save Settings Button */}
         <button className="save-settings" onClick={saveSettings}>
           {translatedLabels.saveSettings}
         </button>

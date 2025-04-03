@@ -3,130 +3,144 @@
   Styles for the Settings page — layout, dropdowns, toggles, and save button
 */
 
+/* Outer container for centering the settings page */
 .outer-div {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #9ac5de;
+  background: #9ac5de; /* Light blue background */
 }
 
+/* Main container for the settings content */
 .settings-container {
   position: relative;
   width: 100vw;
-  max-width: 390px;
+  max-width: 390px; /* Limit the width for smaller screens */
   height: 96vh;
   margin: auto;
   padding: 20px;
-  background: #9ac5de; 
+  background: #9ac5de; /* Matches the outer background */
   text-align: center;
   color: white;
   font-family: "Arial", sans-serif;
 }
 
-  .settings-container h1 {
-    font-size: 34px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: white; 
-  }
+/* Title styling for the settings page */
+.settings-container h1 {
+  font-size: 34px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: white; /* White text for contrast */
+}
 
-  .settings-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-height: 600px;
-    overflow-y: auto;
-  }
-  
-  .settings-list::-webkit-scrollbar {
-    display: none;
-  }
- 
-  .setting-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ffffff;
-    color: #333;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .setting-item:hover {
-    background: #f0f8ff;
-    transform: scale(1.02);
-    transition: all 0.2s ease-in-out;
-  }
+/* List container for settings items */
+.settings-list {
+  list-style: none; /* Remove default list styling */
+  padding: 0;
+  margin: 0;
+  max-height: 600px; /* Limit height for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
 
-  .setting-label {
-    text-align: left;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333; 
-  }
+/* Hide the scrollbar for a cleaner look */
+.settings-list::-webkit-scrollbar {
+  display: none;
+}
 
-  
-  .setting-control {
-    text-align: right;
-  }
-  
-  .setting-toggle {
-    appearance: none;
-    width: 40px;
-    height: 20px;
-    background: #ccc;
-    border-radius: 10px;
-    position: relative;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .setting-toggle::before {
-    content: "";
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    background: white;
-    border-radius: 50%;
-    top: 1px;
-    left: 2px;
-    transition: all 0.3s ease;
-  }
+/* Individual setting item styling */
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff; /* White background for contrast */
+  color: #333; /* Dark text for readability */
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
 
-  .select-dropdown {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #333;
-    background: white;
-  }
- 
-  button.save-settings {
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px;
-    background: #4caf50;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-  }  
-  
-  button.save-settings:hover {
-    background: #388e3c;
-  }
+/* Hover effect for setting items */
+.setting-item:hover {
+  background: #f0f8ff; /* Light blue hover background */
+  transform: scale(1.02); /* Slight zoom effect */
+  transition: all 0.2s ease-in-out; /* Smooth transition */
+}
 
-  .language-dropdown {
-    font-size: 16px;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-  }
+/* Label styling for setting items */
+.setting-label {
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333; /* Dark text for readability */
+}
+
+/* Control container for setting toggles or inputs */
+.setting-control {
+  text-align: right;
+}
+
+/* Toggle switch styling */
+.setting-toggle {
+  appearance: none; /* Remove default browser styling */
+  width: 40px;
+  height: 20px;
+  background: #ccc; /* Default gray background */
+  border-radius: 10px; /* Rounded toggle */
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease; /* Smooth background transition */
+}
+
+/* Toggle switch knob styling */
+.setting-toggle::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: white; /* White knob */
+  border-radius: 50%; /* Circular knob */
+  top: 1px;
+  left: 2px;
+  transition: all 0.3s ease; /* Smooth transition for movement */
+}
+
+/* Dropdown styling for language selection */
+.select-dropdown {
+  padding: 5px;
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 14px;
+  color: #333; /* Dark text */
+  background: white; /* White background */
+}
+
+/* Save button styling */
+button.save-settings {
+  width: 100%; /* Full width button */
+  margin-top: 20px;
+  padding: 12px;
+  background: #4caf50; /* Green background */
+  color: white; /* White text */
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer;
+  transition: background 0.3s ease-in-out; /* Smooth background transition */
+}
+
+/* Hover effect for save button */
+button.save-settings:hover {
+  background: #388e3c; /* Darker green on hover */
+}
+
+/* Dropdown styling for language selection */
+.language-dropdown {
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 5px; /* Rounded corners */
+  border: 1px solid #ccc; /* Light gray border */
+  cursor: pointer;
+}

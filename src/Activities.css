@@ -1,17 +1,20 @@
 /* 
+  Activities.css
   Styling for the Activities page.
-  Handles layout, card styles, dark mode, and responsiveness.
+  Handles layout, card styles, and responsiveness.
 */
 
+/* Outer container for centering the activities page */
 .outer-div {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #9ac5de;
+  background: #9ac5de; 
 }
 
+/* Title styling for the activities page */
 .activities-title {
   position: absolute;
   top: 1.5rem;
@@ -22,13 +25,14 @@
   font-size: 2.5rem;
   font-weight: bold;
   color: white;
-  z-index: 10;
+  z-index: 10; 
 }
 
+/* Main container for activities content */
 .activities-container {
   position: relative;
   width: 100vw;
-  max-width: 500px;
+  max-width: 500px; 
   margin: auto;
   padding: 20px;
   background: #9ac5de; 
@@ -37,6 +41,7 @@
   font-family: "Arial", sans-serif;
 }
 
+/* Navbar styling for navigation buttons */
 .navbar {
   position: fixed;
   width: 85%;
@@ -48,12 +53,13 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  background: #5493c1;
+  background: #5493c1; 
   border-radius: 15px;
   height: 50px;
-  bottom: 20px;
+  bottom: 20px; 
 }
 
+/* Individual navigation button styling */
 .nav-button {
   display: flex;
   flex-direction: column;
@@ -66,41 +72,36 @@
   margin: 10px;
 }
 
+/* Icon styling for navigation buttons */
 .nav-button img {
   width: 25px;
 }
 
-body.dark-mode .activities-container {
-  background: #333; 
-}
-
+/* Title styling inside the activities container */
 .activities-container h1 {
-  font-size: 34px; 
-  font-weight: bold; 
+  font-size: 34px;
+  font-weight: bold;
   margin-bottom: 20px;
   color: white; 
 }
 
-body.dark-mode .activities-container h1 {
-  color: white;
-}
-
+/* List container for places */
 .places-list {
-  list-style: none;
+  list-style: none; 
   padding: 0;
   margin: 0;
   max-height: 600px; 
   overflow-y: auto; 
 }
 
-
+/* Hide the scrollbar for a cleaner look */
 .places-list::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 
-
+/* Individual place item styling */
 .place-item {
-  flex-direction: column; 
+  flex-direction: column;
   background: #ffffff; 
   color: #333; 
   margin: 10px 0;
@@ -109,59 +110,48 @@ body.dark-mode .activities-container h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
-
-body.dark-mode .place-item {
-  background: #555; 
-  color: white;
-}
-
-
+/* Hover effect for place items */
 .place-item:hover {
   background: #f0f8ff; 
   transform: scale(1.02); 
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; 
 }
 
+/* Place information container */
 .place-info {
   text-align: left; 
   width: 100%;
 }
 
+/* Title styling for place names */
 .place-info h3 {
   margin: 0;
   font-size: 18px;
-  color: #333;
+  color: #333; 
 }
 
-body.dark-mode .place-info h3 {
-  color: white; 
-}
-
+/* Paragraph styling for place details */
 .place-info p {
   margin: 5px 0;
   font-size: 14px;
-  color: #666;
+  color: #666; 
 }
 
-body.dark-mode .place-info p {
-  color: #ccc; 
-}
-
+/* Bold styling for the first paragraph in place details */
 .place-info p:first-of-type {
   font-weight: bold;
   color: #333; 
 }
 
-body.dark-mode .place-info p:first-of-type {
-  color: white;
-}
-
+/* Responsive styling for larger screens */
 @media (min-width: 1000px) {
+  /* Outer container adjustments for larger screens */
   .outer-div {
     align-items: flex-start;
     padding-top: 3rem;
   }
 
+  /* Title adjustments for larger screens */
   .activities-title {
     position: absolute;
     top: 1.5rem;
@@ -175,60 +165,67 @@ body.dark-mode .place-info p:first-of-type {
     z-index: 10;
   }
 
+  /* Activities container adjustments for larger screens */
   .activities-container {
-    max-width: 1400px;
+    max-width: 1400px; 
     height: auto;
     text-align: left;
     padding: 0 2rem;
   }
 
+  /* Title styling inside the activities container for larger screens */
   .activities-container h1 {
     text-align: center;
     margin-bottom: 2.5rem;
     font-size: 2.5rem;
   }
 
+  /* Grid layout for places list on larger screens */
   .places-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
     gap: 2rem; 
     max-height: none;
     overflow-y: visible;
-    justify-items: center; 
-    padding: 20px; 
+    justify-items: center;
+    padding: 20px;
   }
 
+  /* Place item adjustments for larger screens */
   .place-item {
     background: white;
     width: 225px;
     height: 400px;
     border-radius: 1rem;
     padding: 1.5rem;
-    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1); 
     transition: transform 0.2s ease-in-out;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; 
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: normal;
     hyphens: auto;
   }
 
+  /* Hover effect for place items on larger screens */
   .place-item:hover {
     transform: translateY(-6px);
-    background-color: #f3f9ff;
+    background-color: #f3f9ff; 
   }
 
+  /* Title styling for place names on larger screens */
   .place-info h3 {
     font-size: 1.3rem;
     margin-bottom: 0.75rem;
     font-weight: bold;
-    color: #222;
+    color: #222; 
   }
 
+  /* Place information container adjustments for larger screens */
   .place-info {
     text-align: left;
     width: 100%;
@@ -241,11 +238,10 @@ body.dark-mode .place-info p:first-of-type {
     height: 100%;
   }
 
+  /* Paragraph styling for place details on larger screens */
   .place-info p {
     font-size: 0.95rem;
     line-height: 1.5;
-    color: #444;
+    color: #444; 
   }
 }
-
-
