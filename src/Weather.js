@@ -28,6 +28,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
   const [coordinates, setCoordinates] = useState({ lat: 51.5074, lon: -0.1278 });
   const [marker, setMarker] = useState(null);
   const [airQualityData, setAirQualityData] = useState(null);
+  const [uvIndex, setUvIndex] = useState(null);
   const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
   const [unit, setUnit] = useState(localStorage.getItem("unit") || "Celsius");
   const [weatherMetrics, setWeatherMetrics] = useState({
@@ -90,7 +91,7 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
 
     const savedMetrics = JSON.parse(localStorage.getItem("metrics")) || {
       precipitation: true,
-      uvIndex: false,
+      uvIndex: true,
       airQuality: false,
       windSpeed: true
     };
@@ -132,6 +133,26 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
     }
   }, [weatherMetrics.airQuality, coordinates, weatherData]);
 
+  useEffect(() => {
+    if (weatherMetrics.uvIndex && coordinates.lat && coordinates.lon) {
+      const fetchUvIndex = async () => {
+        try {
+          const uviUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${API_KEY}`;
+          const uviResponse = await axios.get(uviUrl);
+          if (uviResponse.data) {
+            console.log("UV Index: ", uviResponse.data);
+            setUvIndex(uviResponse.data.value);
+          }
+        } catch (error) {
+          console.error("Error fetching UV Index data:", error);
+        }
+      };
+      fetchUvIndex();
+    } else {
+      setUvIndex(null);
+    }
+  }, [weatherMetrics.uvIndex, coordinates]);
+
   // Handle fetching weather data and updating coordinates
   const fetchWeather = async (location, lat = null, lon = null) => {
     try {
@@ -139,61 +160,72 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
       let forecastUrl;
       let airQualityUrl;
       let uviUrl;
-
-      if (lat && lon) {
+  
+      // If lat/lon is available, construct URLs using coordinates
+      if (lat && lon) {        
         weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
         forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
         airQualityUrl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
         uviUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
       } else {
+        // Default to city-based request if lat/lon is not available
         weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${API_KEY}`;
         forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${API_KEY}`;
-        airQualityUrl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+        airQualityUrl = `https://api.openweathermap.org/data/2.5/air_pollution?q=${location}&appid=${API_KEY}`;
         uviUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
       }
-
+  
+      // Fetch the weather data for the location
       const weatherResponse = await axios.get(weatherUrl);
       if (weatherResponse.data) {
         setWeatherData(weatherResponse.data);
         setCity(weatherResponse.data.name);
+  
+        // Extract lat and lon from weather data if available
         const lat = weatherResponse.data.coord.lat;
         const lon = weatherResponse.data.coord.lon;
-        setCoordinates({ lat, lon }); // Update coordinates
+        setCoordinates({ lat, lon });
+  
+        // Now, ensure lat/lon are defined before making the UV API request
+        if (lat && lon) {
+          const uviResponse = await axios.get(uviUrl);  // Fetch UV Index data
+                  
+          if (uviResponse.data) {
+            const uvValue = uviResponse.data.value;
+            console.log("UV Index:", uvValue);
+            setUvIndex(uvValue);
+          }
+        } else {
+          console.error("Unable to fetch UV data, lat/lon are not defined");
+        }
+      } else {
+        console.error("No weather data found for the specified location.");
       }
-      
-      const uviResponse = await axios.get(uviUrl);
-      if (uviResponse.data) {
-        console.log("UV Index: ", uviResponse.data.value);
-        setWeatherData((prevData) => ({
-          ...prevData,
-          uvi: uviResponse.data.value,
-        }));
-      }
-
+  
+      // Fetch air quality data
       const airQualityResponse = await axios.get(airQualityUrl);
       if (airQualityResponse.data) {
-        console.log("Air quality: ", airQualityResponse.data);
         setAirQualityData(airQualityResponse.data);
       }
-
+  
+      // Fetch the forecast data
       const forecastResponse = await axios.get(forecastUrl);
       if (forecastResponse.data) {
         const hourlyForecast = forecastResponse.data.list.filter((entry, index) => index < 5);
         setForecastData(hourlyForecast);
       }
-      
-
+  
     } catch (error) {
-      console.log(error);
-      if (error.response) {
-        console.log(error.response)
+      console.error("Error fetching weather data:", error);
+      if (error.response && error.response.status === 404) {
         alert("City not found. Please enter a valid city.");
-        return;
       } else {
-        alert("An error occurred while fetching weather data. Please try again later.");
+        console.error("An error occurred while fetching weather data. Please try again later.");
       }
     }
   };
+  
+  
 
   // Get user's geolocation or fallback to default city
   const getUserLocation = () => {
@@ -305,11 +337,11 @@ const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, set
               {weatherMetrics.precipitation && (
                 <p>☔ {weatherData.rain ? weatherData.rain["1h"] : 0} mm</p>
               )}
-              {weatherMetrics.uvIndex && weatherData.uvi && (
-                <p>☀️ {weatherData.uvi}</p>
+              {weatherMetrics.uvIndex && uvIndex !== null && (
+                <p>☀️ UV {uvIndex}</p>
               )}
               {weatherMetrics.airQuality && airQualityData?.list[0]?.main?.aqi && (
-                <p>🌫 {airQualityData.list[0].main.aqi}</p>
+                <p>💨 AQ: {airQualityData.list[0].main.aqi}</p>
               )}
             </div>
 
