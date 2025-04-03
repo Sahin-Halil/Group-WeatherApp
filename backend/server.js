@@ -3,6 +3,9 @@ import cors from "cors";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 
+// server.js
+// backend code for fetching nearby places using Google Maps API for activites page
+
 dotenv.config(); 
 
 const app = express();
@@ -11,7 +14,7 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = process.env.ACTIVITIES_API_KEY;
+const API_KEY = process.env.ACTIVITIES_API_KEY; // Google Maps API key from .env
 
 app.get("/places", async (req, res) => {
   try {
@@ -21,6 +24,7 @@ app.get("/places", async (req, res) => {
       return res.status(400).json({ error: "City parameter is required" });
     }
 
+    // get latitude and longitude for the given city
     const geoResponse = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${API_KEY}`
     );
@@ -32,6 +36,7 @@ app.get("/places", async (req, res) => {
 
     const { lat, lng } = geoData.results[0].geometry.location;
 
+    // fetch nearby tourist attractions and places od interest
     const placesResponse = await fetch(
       `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=5000&type=tourist_attraction&key=${API_KEY}`
     );
@@ -56,6 +61,7 @@ app.get("/places", async (req, res) => {
       "mosque"
     ];
     
+    // limit to 5 places and extract relevant info
     const filteredPlaces = placesData.results.slice(0, 5).map((place) => {
       const matchedType = place.types?.find((t) => allowedTypes.includes(t)) || "other";
       return {

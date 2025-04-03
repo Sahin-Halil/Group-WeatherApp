@@ -4,6 +4,10 @@ import "./Weather.css";
 import Settings from "./Settings";
 import { Link } from "react-router-dom";
 
+// Weather.js
+// Main weather component with API calls, location handling, metrics display, forecast, translation, and map integration
+
+
 // Import Leaflet for map functionality
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -25,7 +29,7 @@ const customMarker = new L.Icon({
 });
 
 const Weather = ({ city, setCity, weatherData, setWeatherData, forecastData, setForecastData }) => {
-  const [coordinates, setCoordinates] = useState({ lat: 51.5074, lon: -0.1278 });
+  const [coordinates, setCoordinates] = useState({ lat: 51.5074, lon: -0.1278 }); // defaults to London
   const [marker, setMarker] = useState(null);
   const [airQualityData, setAirQualityData] = useState(null);
   const [uvIndex, setUvIndex] = useState(null);

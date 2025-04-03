@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './Settings.css';
 import { Link } from 'react-router-dom';
 
+// settings.js
+// Component for updating app settings: language, units, and weather metric preferences
+
 const Settings = ({language, setLanguage, weatherMetrics, setWeatherMetrics}) => {
   const [metrics, setMetrics] = useState(() => {
+    // Load saved metric preferences from localStorage or use defaults
     const savedMetrics = localStorage.getItem("metrics");
     try {
       return savedMetrics ? JSON.parse(savedMetrics) : {

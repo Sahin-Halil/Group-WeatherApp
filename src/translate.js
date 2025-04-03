@@ -1,3 +1,7 @@
+// translate.js
+// Stores translations and a function to fetch translated text.
+
+
 const translations = {
     en: {
       settingsTitle: "Settings",
@@ -76,7 +80,6 @@ const translations = {
   export const translateText = (key, lang = 'en', variables = {}) => {
     let text = translations[lang]?.[key] || translations['en'][key] || key;
     
-    // Replace variables like {city}
     Object.keys(variables).forEach(varKey => {
       text = text.replace(`{${varKey}}`, variables[varKey]);
     });

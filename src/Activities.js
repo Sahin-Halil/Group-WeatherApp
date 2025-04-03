@@ -1,9 +1,12 @@
+// Activities.js
+// Displays a list of interesting places in the selected city, with multilingual support.
+
 import React, { useState, useEffect } from "react";
 import "./Activities.css";
 import { Link } from "react-router-dom";
 
-// Define your translations for different languages
 const translations = {
+  // static translations for english, spanish and french
   en: {
     activitiesNavbar: "Activities",
     weatherNavbar: "Weather",
@@ -82,6 +85,7 @@ const translations = {
 const Activities = ({ city }) => {
   const [places, setPlaces] = useState([]);
   const [language, setLanguage] = useState(localStorage.getItem("language") || "en");
+  // load saved language from LocalStorage, falls back to english
   const [translatedLabels, setTranslatedLabels] = useState(translations[language] || translations["en"]);
   useEffect(() => {
     fetchPlaces(city);
@@ -104,7 +108,7 @@ const Activities = ({ city }) => {
 
   const getTranslatedTypeDescription = (type) => {
     return translatedLabels.typeDescriptions?.[type] || translatedLabels.typeDescriptions?.other;
-  };
+  }; // fallback to 'other' if language or city changes
 
   return (
     <div className="outer-div">
