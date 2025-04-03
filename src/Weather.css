@@ -1,3 +1,8 @@
+/* 
+  weather.css
+  Styles for the Weather page, including responsive layout, sidebar nav, search bar, weather info, forecast, and map.
+*/
+
 @media (min-width: 601px) {
 
   .outer-container {

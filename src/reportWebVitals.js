@@ -1,3 +1,6 @@
+// reportWebVitals.js
+// Optional: Used to measure app performance (default from Create React App)
+
 const reportWebVitals = onPerfEntry => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
     import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {

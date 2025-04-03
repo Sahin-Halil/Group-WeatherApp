@@ -5,11 +5,15 @@ import Weather from "./Weather";
 import Activities from "./Activities";
 import Settings from "./Settings";
 
+// App.js
+// Main application component that handles routing and shared state (city, weather data, language, metrics)
+
 function App() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState([]);
   const [language, setLanguage] = useState(localStorage.getItem("language") || "en");
+  // load saved language from local storage or default to english
   const [weatherMetrics, setWeatherMetrics] = useState(() => {
     const savedMetrics = localStorage.getItem("metrics");
     try {
@@ -21,6 +25,7 @@ function App() {
       };
     } catch (error) {
       console.error("Error parsing metrics from localStorage", error);
+      // return default metrics if parsing fails
       return {
         precipitation: true,
         uvIndex: false,

@@ -1,3 +1,8 @@
+/* 
+  settings.css
+  Styles for the Settings page — layout, dropdowns, toggles, and save button
+*/
+
 .outer-div {
   display: flex;
   justify-content: center;
