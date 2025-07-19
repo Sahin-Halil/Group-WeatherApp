@@ -94,12 +94,12 @@ Create a `.env` file in **both** the frontend (`weather-app`) and backend folder
 
 #### `weather-app/.env`:
 ```env
-REACT_APP_WEATHER_API_KEY=b29c6dcf39f9032ef46114505c791779
+REACT_APP_WEATHER_API_KEY="API key removed for safety"
 ```
 
 #### `backend/.env`:
 ```env
-ACTIVITIES_API_KEY=AIzaSyAJGn2aw7rmJfLkyEsHSJfr4lB79QJamzk
+ACTIVITIES_API_KEY="API key removed for safety"
 ```
 
 ---
